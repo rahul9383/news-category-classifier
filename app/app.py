@@ -1,6 +1,11 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+
+
 import streamlit as st
 import joblib
-import os
 from src.preprocess import clean_text
 
 st.title("📰 News Category Classifier")
