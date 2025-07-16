@@ -37,17 +37,5 @@ if st.button("🔍 Classify"):
     else:
         cleaned = clean_text(headline)
         vect = vectorizer.transform([cleaned])
-        probs = model.predict_proba(vect)[0]
-        top3_idx = np.argsort(probs)[::-1][:3]
-        labels = model.classes_
-        
-        st.markdown("### 📌 Prediction:")
-        for idx in top3_idx:
-            label = labels[idx]
-            emoji = category_emojis.get(label, "📰")
-            prob = probs[idx]
-            st.markdown(f"{emoji} **{label}** — `{prob*100:.2f}%`")
-
-        # Optional: Chart
-        st.markdown("### 📊 Confidence Scores")
-        st.bar_chart({labels[i]: probs[i] for i in top3_idx})
+        prediction = model.predict(vect)[0]
+        st.success(f"Predicted Category: **{prediction}**")
